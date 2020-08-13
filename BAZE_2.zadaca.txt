@@ -1,0 +1,212 @@
+CREATE TABLE ALBUM
+	(ID_ALBUMA NUMERIC(5) UNSIGNED NOT NULL,
+	NAZIV_ALBUMA CHAR(20),
+	GLAZBENI_ZANR CHAR(15),
+	CIJENA_ALBUMA DECIMAL(5,2) UNSIGNED,
+	ID_IZVODACA NUMERIC(5) UNSIGNED,
+	PRIMARY KEY(ID_ALBUMA));
+
+CREATE TABLE IZVODAC
+   	(ID_IZVODACA NUMERIC(5) UNSIGNED NOT NULL,
+    	NAZIV_IZVODACA CHAR(20),
+	BROJ_IZDANIH_ALBUMA NUMERIC(3) UNSIGNED,
+    	ZEMLJA_PORIJEKLA CHAR(20),
+    	GODINA_IZDAVANJA_PRVOG_ALBUMA NUMERIC(4) UNSIGNED,
+    	PRIMARY KEY(ID_IZVODACA));
+
+CREATE TABLE IZDAVAC
+   	(ID_IZDAVACA NUMERIC(5) UNSIGNED NOT NULL,
+    	IME_IZDAVACA CHAR(40),
+    	GODINA_OSNIVANJA NUMERIC(4) UNSIGNED,
+	ZEMLJA_OSNIVANJA CHAR(20),
+    	PRIMARY KEY(ID_IZDAVACA));
+	
+CREATE TABLE IZDAO
+   	(ID_IZDAVACA NUMERIC(5) UNSIGNED NOT NULL,
+    	ID_ALBUMA NUMERIC(5) UNSIGNED NOT NULL,
+    	PRIMARY KEY(ID_IZDAVACA,ID_ALBUMA));
+
+CREATE TABLE NARUDZBA
+   	(SIFRA_NARUDZBE NUMERIC(6) UNSIGNED NOT NULL,
+    	ADRESA_ISPORUKE CHAR(50),
+    	DATUM_ISPORUKE DATE,
+	KORISNICKO_IME_KUPCA CHAR(20) NOT NULL,
+	ID_ALBUMA NUMERIC(5) UNSIGNED NOT NULL,
+    	PRIMARY KEY(SIFRA_NARUDZBE));
+	
+CREATE TABLE KUPAC
+	(KORISNICKO_IME_KUPCA CHAR(20) NOT NULL,
+	IME_PREZIME CHAR(40),
+	BROJ_TELEFONA NUMERIC(14)UNSIGNED,
+	PRIMARY KEY(KORISNICKO_IME_KUPCA));
+	
+INSERT INTO ALBUM
+VALUES
+	(1, 'Staying At Tamara\'s', 'kantautorska', 43.20, 1),
+	(2, 'Jubilee Road','kantautorska', 66.46, 2),
+	(3, 'Wrong Crowd', 'pop', 41.50, 2),
+	(4, 'A Night at the Opera', 'rock', 51.24, 3),
+	(5, 'The Works', 'rock', 41.50, 3),
+	(6, 'Waterloo', 'pop', 48.50, 4),
+	(7, 'ABBA', 'pop', 37.33, 4),
+	(8, 'Super Trouper', 'pop', 41.49, 4),
+	(9, 'A Head Full of Dream', 'pop', 42.16, 5),
+	(10, 'Ghost Stories', 'rock', 36.10, 5),
+	(11, 'Viva la Vida', 'rock', 36.51, 5),
+	(12, 'With The Beatles', 'rock', 82.58, 6),
+	(13, 'Help!', 'rock', 63.95, 6),
+	(14, 'Seven Days Walking', 'klasicna', 421.04, 7),
+	(15, 'Elements', 'klasicna', 49.49, 7),
+	(16, 'Divenire', 'klasicna', 58.15, 7),
+	(17, 'Una Mattina', 'klasicna', 49.87, 7),
+	(18, 'I Giorni', 'klasicna', 69.00, 7);
+INSERT INTO ALBUM
+VALUES
+	(19, 'News of the World', 'rock', 73.18, 3),
+	(20, 'Queen', 'rock', 41.55, 3),
+	(21, 'Queen II', 'rock', 48.08, 3),
+	(22, 'Sheer Heart Attack', 'rock',41.57, 3),
+	(23, 'A Day at the Races', 'rock', 52.34, 3),
+	(24, 'Made in Heaven', 'rock', 43.89, 3),
+	(25, 'The Miracle', 'rock', 49.99, 3),
+	(26, 'A Hard Day\'s Night', 'rock', 40.00, 6),
+	(27, 'Please Please me', 'rock', 45.99, 6),
+	(28, 'Abbey Road', 'rock', 55.00, 6);
+INSERT INTO ALBUM
+VALUES 
+	(29, 'Parachutes', 'pop', 52.32, 5),
+	(30, 'A Rush of Blood to the Head', 'rock', 57.99, 5),
+	(31, 'The National', 'rock', 45.00, 8),
+	(32, 'Alligator', 'rock', 42.00, 8),
+	(33, 'Boxer', 'rock', 45.99, 8),
+	(34, 'High Violet', 'rock', 41.35, 8),
+	(35, 'Touble Will Find me', 'rock', 53.99, 8),
+	(36, 'Sleep Well Beast', 'rock', 55.70, 8),
+	(37, 'I Am Easy to Find', 'rock', 62.85, 8),
+	(38, 'Wanted on a Voyage', 'pop', 47.89, 1);
+	 
+	
+	
+
+INSERT INTO IZDAVAC
+VALUES 
+	(1, 'Columbia Records', 1888, 'USA'),
+	(2, 'Hollywood Records', 1989, 'USA'),
+	(3, 'EMI', 1931, 'UK'),
+	(4, 'Polar Music', 1963, 'Svedska'),
+	(5, 'Henson Recording Studios', 1967, 'USA'),
+	(6, 'Parlophone', 1896, 'Njemacka') ,
+	(7, 'Decca Records', 1929, 'UK'),
+	(8, 'Sony Music Classical', 1924, 'USA');
+
+INSERT INTO IZDAVAC
+VALUES
+	(9, 'Capitol Records', 1942, 'USA'),
+	(10, 'Brassland Records', 2001, 'USA'),
+	(11, '4AD', 1980, 'UK');
+
+INSERT INTO IZDAO
+VALUES 
+	(1, 1), (1, 2), (1, 3),
+	(2, 4), 
+	(3, 5), (3, 19), (3, 20), (3, 21),
+	(4, 6), (4, 7), (4, 8),
+	(5, 9),
+	(6, 10), (6, 11), (6, 12), (6, 13),
+	(7, 14), (7, 15), (7, 16), (7, 17),
+	(8, 18);
+
+INSERT INTO IZDAO
+VALUES
+	(3, 22), (3, 23), (3, 24), (3, 25),
+	(6, 24), (6, 25), (6, 26), (6, 27), (6, 28),
+	(9, 29), (9, 30), (3, 30),
+	(10, 31), (10, 32), (10, 33),
+	(11, 34), (11, 35), (11, 36), (11, 37), (11, 38);
+
+
+INSERT INTO IZVODAC
+VALUES 
+	(1, 'George Ezra', 2, 'UK', 2014),
+	(2, 'Tom Odell', 3, 'UK', 2013),
+	(3, 'Queen', 16, 'UK', 1973),
+	(4, 'ABBA', 8, 'Svedska', 1973),
+	(5, 'Coldplay', 7, 'UK', 2000),
+	(6, 'The Beatles', 13, 'UK', 1963),
+	(7, 'Ludovico Einaudi', 14, 'Italija', 1988);
+
+INSERT INTO IZVODAC
+VALUES
+	(8, 'The National', 8, 'USA', 2001);
+
+	
+INSERT INTO NARUDZBA
+VALUES
+	(563289, 'Ul. Antuna Mihanovica 5, Zagreb', '2019-06-17', 'mirko', 4),
+	(763904, 'Ul. Gustava Krkleca 65, Rovinj', '2019-07-12', 'kreso', 32),
+	(142563, 'Nazorova ulica 15, Varazdin', '2019-07-01', 'josip94', 8),
+	(594380, 'Primorska ulica 76, Zadar', '2019-07-21', 'karla123', 19),
+	(276594, 'Bijenicka 45, Zagreb', '2019-06-18', 'anabanana', 21),
+	(845023, 'Ul. Nikole Tesle 12, Zagreb','2019-06-28', 'martinaM', 15),
+	(978965, 'Ozaljska ulica 56, Zagreb','2019-06-28', 'hanaH', 17),
+	(358390, 'Kalelarga 78, Zadar','2019-06-18', 'ruzica', 1),
+	(678567, 'Novigradska 97, Novigrad','2019-07-13', 'janko', 37),
+	(456238, 'Ul. Mire Gavrana 30, Osijek','2019-07-13', 'darko78', 33),
+	(125689, 'Ul. Antuna Mihanovica 5, Zagreb', '2019-06-22', 'mirko', 7),
+	(894604, 'Ul. Antuna Mihanovica 5, Zagreb', '2019-06-22', 'mirko', 14),
+	(257809, 'Kalelarga 78, Zadar','2019-07-18', 'ruzica', 26),
+	(175647, 'Primorska ulica 76, Zadar', '2019-07-21', 'karla123',34),
+	(185464, 'Zagrebacka ulica 43, Zadar', '2019-07-22', 'karla123',25),
+	(195831, 'Zagrebacka ulica 43, Zadar', '2019-07-30', 'karla123',3),
+	(295731, 'Zadarska ulica 27, Zadar', '2019-07-30', 'karla123',2),
+	(656567, 'Novigradska 97, Novigrad','2019-07-18', 'janko', 29);
+	
+INSERT INTO KUPAC
+VALUES
+	('mirko', 'Mirko Mirkovic', 017483209),
+	('kreso', 'Kreso Kresic', 0981568724),
+	('josip94', 'Josip Horvat', 042459821),
+	('karla123', 'Karla Benic', 0952673867),
+	('anabanana', 'Ana Anic', 016724356),
+	('martinaM', 'Martina Mirkovic', 012346789),
+	('hanaH', 'Hana Hanic', 0923487654),
+	('ruzica', 'Ruzica Modric', 0993457832),
+	('janko', 'Janko Jankovic', 0912378945),
+	('darko78', 'Darko Daric', 0981426754);
+
+
+
+### 1. Koliko u prosjeku košta album po žanru? Gledamo samo za zanrove za koje je zabiljezeno barem 5 albuma. Ispiši zanr, prosjeènu cijenu te broj albuma po zanru koji su evidentirani u bazi.
+
+SELECT GLAZBENI_ZANR, AVG(CIJENA_ALBUMA) 'Prosjecna cijena', COUNT(*) 'Broj albuma'
+FROM ALBUM
+GROUP BY GLAZBENI_ZANR
+HAVING COUNT(*)>=5
+ORDER BY AVG(CIJENA_ALBUMA);
+
+
+### 2. Naði sve rock albume koje su izdali izvodaci iz UK i koji su jeftiniji od 50 kn, te sortiraj po cijeni silazno.
+
+SELECT NAZIV_ALBUMA, NAZIV_IZVODACA, CIJENA_ALBUMA 
+FROM ALBUM, IZVODAC
+WHERE ALBUM.ID_IZVODACA=IZVODAC.ID_IZVODACA
+AND ALBUM.GLAZBENI_ZANR LIKE 'rock'
+AND IZVODAC.ZEMLJA_PORIJEKLA='UK'
+AND ALBUM.CIJENA_ALBUMA<50
+ORDER BY CIJENA_ALBUMA DESC;
+
+### 3. Nadi sve kupce iz Zagreba koji su naruèili album grupe Queen i sortiraj po datumu isporuke uzlazno.
+
+SELECT IME_PREZIME,NAZIV_ALBUMA, ADRESA_ISPORUKE, DATUM_ISPORUKE 
+FROM KUPAC, NARUDZBA, ALBUM, IZVODAC
+WHERE KUPAC.KORISNICKO_IME_KUPCA=NARUDZBA.KORISNICKO_IME_KUPCA
+AND NARUDZBA.ID_ALBUMA=ALBUM.ID_ALBUMA
+AND ALBUM.ID_IZVODACA=IZVODAC.ID_IZVODACA
+AND NARUDZBA.ADRESA_ISPORUKE LIKE '%Zagreb'
+AND IZVODAC.NAZIV_IZVODACA='Queen'
+ORDER BY DATUM_ISPORUKE;
+
+
+
+
+	
